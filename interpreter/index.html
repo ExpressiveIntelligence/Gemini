@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="lib/require.js"></script> 
+    <script type="text/javascript" src="lib/phaser.js"></script> 
+
+    <script type="text/javascript" src="Resource.js"></script>
+    <script type="text/javascript" src="Entity.js"></script>
+    <script type="text/javascript" src="Pool.js"></script>
+    <script type="text/javascript" src="Action.js"></script>
+    <script type="text/javascript" src="Rule.js"></script>
+    <script type="text/javascript" src="Collector.js"></script>
+
+    <script type="text/javascript" src="PhaserDriver.js"></script>
+    <script type="text/javascript" src="Interpreter.js"></script>
+</head>
+<body>
+
+	<input type="file" id="input" accept=".lp,.txt" onchange="Interpreter.openFile(event)">
+
+	<div id="game"></div>
+
+	<pre id='output'></pre>
+
+</body>
