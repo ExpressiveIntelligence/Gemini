@@ -4,9 +4,9 @@
 
 function Rule () {
 
-	var conditions = [];
-	this.actions = [];
-	this.allConditionsMet = false;
+	var conditions = [],
+		actions = [],
+		allConditionsMet = false;
 
 	// Categorization of each supported condition operation into a broad type
 	var conditionTypeMap = 
@@ -40,26 +40,35 @@ function Rule () {
 		
 		this.conditionMet = false;
 
-		var checkCondition = function (currentState) {
+		// currentState is an object of variables with their current values?
+		this.checkCondition = function (currentState) {
 
-			//switch (this.operation) {
-			//	case "ge" : 
-			//		return getValue(this.args[0]) >= getValue(this.args[1]);
-			//	case "le" : 
-			//		return getValue(this.args[0]) <= getValue(this.args[1]);
-			//}
-			// return true or false	
+			switch (this.operation) {
+				case "ge" : 
+					return this.args[0].getValue() >= this.args[1].getValue();
+				case "le" : 
+					return this.args[0].getValue() <= this.args[1].getValue();
+				default: 
+					return false;
+			}
+			//return true or false	
 		}
 	
 	}
 
-	var addCondition = function (operation, args, text) {
+	function addCondition (operation, args, text) {
 		conditions.push(new Condition(operation, args, text));
+	}
+
+	function addAction (operation, args, text) {
+		actions.push(new Action(operation, args, text));
 	}
 
 	return {
 		addCondition : addCondition,
-		conditions : conditions
+		addAction : addAction,
+		conditions : conditions,
+		actions: actions
 	}
 
 }

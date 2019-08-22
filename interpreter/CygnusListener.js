@@ -209,12 +209,246 @@ CygnusListener.prototype.exitCondition = function(ctx) {
 };
 
 
-// Enter a parse tree produced by CygnusParser#action.
-CygnusListener.prototype.enterAction = function(ctx) {
+// Enter a parse tree produced by CygnusParser#Add.
+CygnusListener.prototype.enterAdd = function(ctx) {
 };
 
-// Exit a parse tree produced by CygnusParser#action.
-CygnusListener.prototype.exitAction = function(ctx) {
+// Exit a parse tree produced by CygnusParser#Add.
+CygnusListener.prototype.exitAdd = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#Delete.
+CygnusListener.prototype.enterDelete = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#Delete.
+CygnusListener.prototype.exitDelete = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#Draw.
+CygnusListener.prototype.enterDraw = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#Draw.
+CygnusListener.prototype.exitDraw = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#Clear.
+CygnusListener.prototype.enterClear = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#Clear.
+CygnusListener.prototype.exitClear = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#Fill.
+CygnusListener.prototype.enterFill = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#Fill.
+CygnusListener.prototype.exitFill = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#Increase.
+CygnusListener.prototype.enterIncrease = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#Increase.
+CygnusListener.prototype.exitIncrease = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#Decrease.
+CygnusListener.prototype.enterDecrease = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#Decrease.
+CygnusListener.prototype.exitDecrease = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#IncreaseOverTime.
+CygnusListener.prototype.enterIncreaseOverTime = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#IncreaseOverTime.
+CygnusListener.prototype.exitIncreaseOverTime = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#DecreaseOverTime.
+CygnusListener.prototype.enterDecreaseOverTime = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#DecreaseOverTime.
+CygnusListener.prototype.exitDecreaseOverTime = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#SetValue.
+CygnusListener.prototype.enterSetValue = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#SetValue.
+CygnusListener.prototype.exitSetValue = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#SetPoint.
+CygnusListener.prototype.enterSetPoint = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#SetPoint.
+CygnusListener.prototype.exitSetPoint = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#SetBool.
+CygnusListener.prototype.enterSetBool = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#SetBool.
+CygnusListener.prototype.exitSetBool = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#Move.
+CygnusListener.prototype.enterMove = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#Move.
+CygnusListener.prototype.exitMove = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#MoveToward.
+CygnusListener.prototype.enterMoveToward = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#MoveToward.
+CygnusListener.prototype.exitMoveToward = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#MoveAway.
+CygnusListener.prototype.enterMoveAway = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#MoveAway.
+CygnusListener.prototype.exitMoveAway = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#SetAcceleration.
+CygnusListener.prototype.enterSetAcceleration = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#SetAcceleration.
+CygnusListener.prototype.exitSetAcceleration = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#ApplyRestitution.
+CygnusListener.prototype.enterApplyRestitution = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#ApplyRestitution.
+CygnusListener.prototype.exitApplyRestitution = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#Rotate.
+CygnusListener.prototype.enterRotate = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#Rotate.
+CygnusListener.prototype.exitRotate = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#RotateTo.
+CygnusListener.prototype.enterRotateTo = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#RotateTo.
+CygnusListener.prototype.exitRotateTo = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#LookAt.
+CygnusListener.prototype.enterLookAt = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#LookAt.
+CygnusListener.prototype.exitLookAt = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#SetSprite.
+CygnusListener.prototype.enterSetSprite = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#SetSprite.
+CygnusListener.prototype.exitSetSprite = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#SetColor.
+CygnusListener.prototype.enterSetColor = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#SetColor.
+CygnusListener.prototype.exitSetColor = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#SetSize.
+CygnusListener.prototype.enterSetSize = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#SetSize.
+CygnusListener.prototype.exitSetSize = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#SetBounce.
+CygnusListener.prototype.enterSetBounce = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#SetBounce.
+CygnusListener.prototype.exitSetBounce = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#SetDraggable.
+CygnusListener.prototype.enterSetDraggable = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#SetDraggable.
+CygnusListener.prototype.exitSetDraggable = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#SetStatic.
+CygnusListener.prototype.enterSetStatic = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#SetStatic.
+CygnusListener.prototype.exitSetStatic = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CygnusParser#ModeChange.
+CygnusListener.prototype.enterModeChange = function(ctx) {
+};
+
+// Exit a parse tree produced by CygnusParser#ModeChange.
+CygnusListener.prototype.exitModeChange = function(ctx) {
 };
 
 

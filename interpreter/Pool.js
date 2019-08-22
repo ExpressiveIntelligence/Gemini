@@ -1,5 +1,6 @@
 /* 
  * Pool class, including the subclass, subpool
+ * TODO: Merge with Entity?
  */
 
 function Pool () {

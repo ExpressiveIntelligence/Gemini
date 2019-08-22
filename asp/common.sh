@@ -1,3 +1,12 @@
 #!/bin/bash
-echo "generation_constraints.lp generation_rules.lp generation_atoms.lp generation.lp  structure_rules.lp banned_list.lp readings.lp simplicity_tuning.lp player_model.lp replacements.lp"
+echo "generation/generation_constraints
+generation/generation_rules
+generation/generation_atoms
+generation/generation
+generation/structure_rules
+generation/banned_list
+generation/readings
+generation/simplicity_tuning
+generation/player_model
+generation/replacements"
 

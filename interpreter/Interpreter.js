@@ -9,7 +9,6 @@ var Interpreter = ( function () {
     const CygnusParser = require('./CygnusParser');
     const GameListener = require('./GameListener').GameListener;
 
-
     // Called when the file chooser form input is submitted
     function openFile (event) {
         var input = event.target;
@@ -17,7 +16,10 @@ var Interpreter = ( function () {
         var reader = new FileReader();
     
         reader.onload = function() {
+
+            // TODO: remove (or reuse?) previous Phaser game, if any
     
+            // Read and parse contents of game file
             var contents = reader.result;
             parseGame (contents);
     
@@ -41,10 +43,11 @@ var Interpreter = ( function () {
     
         parser.buildParseTrees = true;
         var tree = parser.game();
-        console.log("Parsed:",tree);
+        console.log("Parse tree:",tree);
     
         var data = new Collector();
     
+        // Populate data with all this game's data
         var gameListener = new GameListener(data);
         antlr4.tree.ParseTreeWalker.DEFAULT.walk(gameListener, tree);
     
@@ -52,6 +55,7 @@ var Interpreter = ( function () {
         console.log("Game resources:",data.getResources());
         console.log("Game pools:",data.getPools());
         console.log("Game rules:",data.getRules());
+        console.log("Game initializing actions:",data.getInitial());
 
         initGame(data);
     
@@ -59,7 +63,7 @@ var Interpreter = ( function () {
 
     function initGame (data) {
 
-
+        //console.log("data:", data);
 
         PhaserDriver.init(data);
     }

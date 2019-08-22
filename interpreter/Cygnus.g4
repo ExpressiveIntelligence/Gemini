@@ -84,40 +84,42 @@ condition
 	| 'tick'
 	; 
 
+// Label the outermost alternatives of the action rule using the # operator 
+// Tells Antlr to generate a separate listener method for each alternative of action
 action 
-	: 'add' '(' entity ',' value ',' point ')'
-	| 'delete' '(' entity ')' 
-	| 'draw' '(' point ',' WORD ')' // WORD should be a color
-	| 'clear' '(' point ')'
-	| 'fill' '(' ('all'|location) ',' WORD ')' // WORD should be a color
+	: 'add' '(' entity ',' value ',' point ')' 	# Add
+	| 'delete' '(' entity ')' 					# Delete
+	| 'draw' '(' point ',' WORD ')' 			# Draw 		// WORD should be a color
+	| 'clear' '(' point ')'						# Clear
+	| 'fill' '(' ('all'|location) ',' WORD ')' 	# Fill 		// WORD should be a color
 
-	| 'increase' '(' settable ',' value ')'
-	| 'decrease' '(' settable ',' value ')'
-	| 'increase_over_time' '(' settable ',' value ')'
-	| 'decrease_over_time' '(' settable ',' value ')'
+	| 'increase' '(' settable ',' value ')'				# Increase
+	| 'decrease' '(' settable ',' value ')'				# Decrease
+	| 'increase_over_time' '(' settable ',' value ')'	# IncreaseOverTime
+	| 'decrease_over_time' '(' settable ',' value ')'	# DecreaseOverTime
 
-	| 'set_value' '(' settable ',' value ')'
-	| 'set_point' '(' settable_point ',' point ')'
-	| 'set_bool' '(' settable_bool ',' bool ')'
+	| 'set_value' '(' settable ',' value ')'			# SetValue
+	| 'set_point' '(' settable_point ',' point ')'		# SetPoint
+	| 'set_bool' '(' settable_bool ',' bool ')'			# SetBool
 
-	| 'moves' '(' entity ',' direction ',' value ')' // For consistency, consider changing to 'move'
-	| 'move_toward' '(' entity ',' point ',' value ')'
-	| 'move_away' '(' entity ',' point ',' value ')'
+	| 'moves' '(' entity ',' direction ',' value ')' 	# Move // For consistency, consider changing to 'move'
+	| 'move_toward' '(' entity ',' point ',' value ')'	# MoveToward
+	| 'move_away' '(' entity ',' point ',' value ')'	# MoveAway
 
-	| 'set_acceleration' '(' entity ',' ( direction | point ) ',' value ')' 
-	| 'apply_restitution' '(' entity ',' entity ')'
-	| 'rotates' '(' entity ',' angular_direction ',' value ')' // Consider changing to 'rotate'
-	| 'rotate_to' '(' entity ',' value ')' // Red in BNF but used in games now.
-	| 'look_at' '(' entity ',' point ',' look_criterion ')'
+	| 'set_acceleration' '(' entity ',' ( direction | point ) ',' value ')' 	# SetAcceleration
+	| 'apply_restitution' '(' entity ',' entity ')'								# ApplyRestitution
+	| 'rotates' '(' entity ',' angular_direction ',' value ')' 		# Rotate // Consider changing to 'rotate'
+	| 'rotate_to' '(' entity ',' value ')' 							# RotateTo // Red in BNF but used in games now.
+	| 'look_at' '(' entity ',' point ',' look_criterion ')'			# LookAt
 
-	| 'set_sprite' '(' entity ',' WORD ')' // WORD should be a sprite
-	| 'set_color' '(' entity ',' WORD ')' // WORD should be a color
-	| 'set_size' '(' entity ',' value ')' // Red in BNF
-	| 'set_bounce' '(' entity ',' value ')' // Red in BNF
-	| 'set_draggable' '(' entity ',' bool ')'
-	| 'set_static' '(' entity ',' bool ')'
+	| 'set_sprite' '(' entity ',' WORD ')' 		# SetSprite 	// WORD should be a sprite
+	| 'set_color' '(' entity ',' WORD ')' 		# SetColor 		// WORD should be a color
+	| 'set_size' '(' entity ',' value ')' 		# SetSize 		// Red in BNF
+	| 'set_bounce' '(' entity ',' value ')' 	# SetBounce 	// Red in BNF				
+	| 'set_draggable' '(' entity ',' bool ')'	# SetDraggable
+	| 'set_static' '(' entity ',' bool ')'		# SetStatic 	// Only allowed in initialize()?
 
-	| 'mode_change' '(' WORD ')' // WORD should be a mode
+	| 'mode_change' '(' WORD ')' 				# ModeChange 	// WORD should be a mode
 	;
 
 value 
@@ -181,7 +183,7 @@ BOOL: 'true' | 'false';
 NUM : [0-9]+;
 
 WORD: ([a-z]|[A-Z]|[0-9]|'_')+ ; 
-WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines (using Antlr's ->skip directive)
 
 COMMENT: '%' ~[\n\r]* ( [\n\r] | EOF) -> channel(HIDDEN) ;
 MULTILINE_COMMENT: '/*' ( MULTILINE_COMMENT | . )*? ('*/' | EOF) -> channel(HIDDEN);

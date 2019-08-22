@@ -4,6 +4,7 @@ function Collector () {
 		resources = {},
 		pools = {}, // An object whose keys are pool names and values are each an array of subpools
 		rules = {},
+		initial = [], // An array of actions to do at game start
 		state = {};
 
 	// Getters
@@ -11,6 +12,10 @@ function Collector () {
 	function getResources () { return resources; }
 	function getPools () { return pools; }
 	function getRules () { return rules; }
+	function getInitial () { return initial; }
+
+	function getResource (resourceID) { return resources[resourceID]; }
+	function getEntityProperty (entityID, propertyName) { return entities[entityID][propertyName]; }
 
 	// Setters
 	function registerEntity (entityID) {
@@ -35,25 +40,15 @@ function Collector () {
 	}
 
 	function registerRule (ruleID) {
+		// If this rule ID has not been added to the rule symbol table, add it
 		if (!rules.hasOwnProperty(ruleID)) {
 			rules[ruleID] = new Rule();
 		}
 	}
 
-	function isBaseCase (actionArg) {
-		switch (actionArg) {
-			case "scalar": 
-			case "bool": 
-			case "WORD": 
-				return true;
-			default: 
-				return false;
-		}
-	}
-
 	// Recursively build an action
 	// Return that complex action
-	function createAction (operation, args) {
+	//function createAction (operation, args) {
 
 		//console.log("action:",operation);
 		//args.forEach (function (arg) {
@@ -61,8 +56,8 @@ function Collector () {
 			//console.log("-arg:",arg);
 		//});
 
-		return new Action (operation,args);
-	}
+	//	return new Action (operation,args);
+	//}
 
 	function registerEntityProperty (entityID, propertyName, value) {
 		entities[entityID][propertyName] = value;
@@ -76,15 +71,33 @@ function Collector () {
 		pools[poolID].addSubpool(row, col, locationType, withinType);
 	}
 
+	/* Register a single rule condition (a rule can have multiple conditions which all must be true)
+	 * Params: 
+	 * 	operation could be: ge, le, overlaps, timer_elapsed, button, click
+	 * 	args: arguments to the condition operation (vary by operation)
+	 * 		ge and le: 		[a, b] for a <= b or a >= b
+	 * 		overlaps: 		[e1, e2, bool] where e1, e2 are entity IDs and bool is true (overlapping) or false (not)
+	 * 		timer_elapsed: 	[timerID]
+	 * 		button: 		[button, button_state], e.g., ["mouse", "held"]
+	 * 		click: 			[entityID]
+	 * 	button could be: 		mouse | key_up | key_down | key_left | key_right | key_space
+	 *  button_state could be: 	pressed | held | released 
+	 */
 	function registerCondition (ruleID, operation, args, text) {
 		// expect args to be an array
 		rules[ruleID].addCondition(operation, args, text);
 	}
 
-	function registerAction (operation, args, ruleID=null) {
+	function registerAction (operation, args, text, ruleID=null) {
+
+		console.log ("In Collector.registerAction()");
+		console.log ("op:", operation, ", args:", args, ", text:", text, ", ruleID:", ruleID);
 
 		if (ruleID==null) {
 			// This action is in an 'initialize' statement (no ruleID)
+			initial.push(new Action(operation, args, text))
+		} else { 
+			rules[ruleID].addAction(operation, args, text);
 		}
 
 	}
@@ -94,12 +107,16 @@ function Collector () {
 		getResources : getResources,
 		getPools : getPools,
 		getRules : getRules,
+		getInitial : getInitial,
 
 		registerEntity : registerEntity,
 		registerResource : registerResource,
 		registerPool : registerPool,
 		registerRule : registerRule,
-		createAction : createAction,
+		registerAction : registerAction,
+
+		getResource : getResource,
+		getEntityProperty : getEntityProperty,
 
 		registerEntityProperty : registerEntityProperty,
 		registerResourceProperty : registerResourceProperty,

@@ -5,8 +5,9 @@
 var PhaserDriver = ( function () {
 
 	var phaserGame;
-	var gameData; // Data object populated by Interpreter and GameListener
+	var gameData; // Data object (instance of Collector) populated by Interpreter and GameListener
 
+	var state;
 	var previousState;
 	var nextState;
 	var driverConditions; // Conditions that the driver needs to check and return to Interpreter
@@ -48,20 +49,52 @@ var PhaserDriver = ( function () {
 		create : function () { 
 
 			console.log("from within Phaser create()");
-			console.log("Game entities:", gameData.getEntities());
+			console.log("Game rules:", gameData.getRules());
+
+			rules = gameData.getRules();
 
 		},
 
 		update : function () {
 
+
+
+			// For each rule in this game
+			Object.keys(rules).forEach( function(rule) {
+				//console.log(rule, rules[rule]);
+
+				// For each condition on this rule
+				rules[rule].conditions.forEach( function (condition) {
+					//console.log("  condition:", condition);
+					//console.log("     met:", condition.checkCondition(state));
+
+					// Check condition, set its conditionMet flag to true or false
+					// If any are false, break?
+
+				});
+
+			});
+
 			// Check external conditions 
 			//checkExternalConditions(); 
 
 			// Get updated state from the Interpeter
-			// nextState = Interpreter.step (previousState, driverConditions)
+			// state = Interpreter.step (previousState, driverConditions)
 
 		}
 
+	}
+
+	function getColorAmount (color) {
+		return 42;
+	}
+
+	function getEntityDistance (e1, e2, criterion) {
+		return 33;
+	}
+
+	function areEntitiesOverlapping (e1, e2) {
+		return false;
 	}
 
 	function checkExternalConditions () {

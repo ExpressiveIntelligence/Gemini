@@ -43,7 +43,7 @@ precondition(le(amount(orange),scalar(9)),outcome(o_2_XX_)).
 result(outcome(o_2_XX_),decrease_over_time(property(entity(e_1_XX_),health),scalar(10))).
 result(outcome(o_2_XX_),increase_over_time(property(entity(e_1_XX_),health),scalar(10))).
 
-precondition(timer_elapsed(t_1_XX_),outcome(o_3_XX_)).
+precondition(timer_elapsed(timer(t_1_XX_)),outcome(o_3_XX_)).
 result(outcome(o_3_XX_),add(entity(e_1_XX_),scalar(1),pool(entity(e_1_XX_)))).
 
 precondition(tick,tick).

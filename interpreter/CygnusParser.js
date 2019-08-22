@@ -2522,7 +2522,657 @@ function ActionContext(parser, parent, invokingState) {
 ActionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 ActionContext.prototype.constructor = ActionContext;
 
-ActionContext.prototype.entity = function(i) {
+
+ 
+ActionContext.prototype.copyFrom = function(ctx) {
+    antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
+};
+
+
+function AddContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+AddContext.prototype = Object.create(ActionContext.prototype);
+AddContext.prototype.constructor = AddContext;
+
+CygnusParser.AddContext = AddContext;
+
+AddContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+AddContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+
+AddContext.prototype.point = function() {
+    return this.getTypedRuleContext(PointContext,0);
+};
+AddContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterAdd(this);
+	}
+};
+
+AddContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitAdd(this);
+	}
+};
+
+
+function DeleteContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+DeleteContext.prototype = Object.create(ActionContext.prototype);
+DeleteContext.prototype.constructor = DeleteContext;
+
+CygnusParser.DeleteContext = DeleteContext;
+
+DeleteContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+DeleteContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterDelete(this);
+	}
+};
+
+DeleteContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitDelete(this);
+	}
+};
+
+
+function FillContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+FillContext.prototype = Object.create(ActionContext.prototype);
+FillContext.prototype.constructor = FillContext;
+
+CygnusParser.FillContext = FillContext;
+
+FillContext.prototype.WORD = function() {
+    return this.getToken(CygnusParser.WORD, 0);
+};
+
+FillContext.prototype.location = function() {
+    return this.getTypedRuleContext(LocationContext,0);
+};
+FillContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterFill(this);
+	}
+};
+
+FillContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitFill(this);
+	}
+};
+
+
+function DrawContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+DrawContext.prototype = Object.create(ActionContext.prototype);
+DrawContext.prototype.constructor = DrawContext;
+
+CygnusParser.DrawContext = DrawContext;
+
+DrawContext.prototype.point = function() {
+    return this.getTypedRuleContext(PointContext,0);
+};
+
+DrawContext.prototype.WORD = function() {
+    return this.getToken(CygnusParser.WORD, 0);
+};
+DrawContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterDraw(this);
+	}
+};
+
+DrawContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitDraw(this);
+	}
+};
+
+
+function RotateContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+RotateContext.prototype = Object.create(ActionContext.prototype);
+RotateContext.prototype.constructor = RotateContext;
+
+CygnusParser.RotateContext = RotateContext;
+
+RotateContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+RotateContext.prototype.angular_direction = function() {
+    return this.getTypedRuleContext(Angular_directionContext,0);
+};
+
+RotateContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+RotateContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterRotate(this);
+	}
+};
+
+RotateContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitRotate(this);
+	}
+};
+
+
+function MoveTowardContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+MoveTowardContext.prototype = Object.create(ActionContext.prototype);
+MoveTowardContext.prototype.constructor = MoveTowardContext;
+
+CygnusParser.MoveTowardContext = MoveTowardContext;
+
+MoveTowardContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+MoveTowardContext.prototype.point = function() {
+    return this.getTypedRuleContext(PointContext,0);
+};
+
+MoveTowardContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+MoveTowardContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterMoveToward(this);
+	}
+};
+
+MoveTowardContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitMoveToward(this);
+	}
+};
+
+
+function SetPointContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+SetPointContext.prototype = Object.create(ActionContext.prototype);
+SetPointContext.prototype.constructor = SetPointContext;
+
+CygnusParser.SetPointContext = SetPointContext;
+
+SetPointContext.prototype.settable_point = function() {
+    return this.getTypedRuleContext(Settable_pointContext,0);
+};
+
+SetPointContext.prototype.point = function() {
+    return this.getTypedRuleContext(PointContext,0);
+};
+SetPointContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterSetPoint(this);
+	}
+};
+
+SetPointContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitSetPoint(this);
+	}
+};
+
+
+function SetBoolContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+SetBoolContext.prototype = Object.create(ActionContext.prototype);
+SetBoolContext.prototype.constructor = SetBoolContext;
+
+CygnusParser.SetBoolContext = SetBoolContext;
+
+SetBoolContext.prototype.settable_bool = function() {
+    return this.getTypedRuleContext(Settable_boolContext,0);
+};
+
+SetBoolContext.prototype.bool = function() {
+    return this.getTypedRuleContext(BoolContext,0);
+};
+SetBoolContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterSetBool(this);
+	}
+};
+
+SetBoolContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitSetBool(this);
+	}
+};
+
+
+function SetDraggableContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+SetDraggableContext.prototype = Object.create(ActionContext.prototype);
+SetDraggableContext.prototype.constructor = SetDraggableContext;
+
+CygnusParser.SetDraggableContext = SetDraggableContext;
+
+SetDraggableContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+SetDraggableContext.prototype.bool = function() {
+    return this.getTypedRuleContext(BoolContext,0);
+};
+SetDraggableContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterSetDraggable(this);
+	}
+};
+
+SetDraggableContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitSetDraggable(this);
+	}
+};
+
+
+function ClearContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+ClearContext.prototype = Object.create(ActionContext.prototype);
+ClearContext.prototype.constructor = ClearContext;
+
+CygnusParser.ClearContext = ClearContext;
+
+ClearContext.prototype.point = function() {
+    return this.getTypedRuleContext(PointContext,0);
+};
+ClearContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterClear(this);
+	}
+};
+
+ClearContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitClear(this);
+	}
+};
+
+
+function DecreaseOverTimeContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+DecreaseOverTimeContext.prototype = Object.create(ActionContext.prototype);
+DecreaseOverTimeContext.prototype.constructor = DecreaseOverTimeContext;
+
+CygnusParser.DecreaseOverTimeContext = DecreaseOverTimeContext;
+
+DecreaseOverTimeContext.prototype.settable = function() {
+    return this.getTypedRuleContext(SettableContext,0);
+};
+
+DecreaseOverTimeContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+DecreaseOverTimeContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterDecreaseOverTime(this);
+	}
+};
+
+DecreaseOverTimeContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitDecreaseOverTime(this);
+	}
+};
+
+
+function LookAtContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+LookAtContext.prototype = Object.create(ActionContext.prototype);
+LookAtContext.prototype.constructor = LookAtContext;
+
+CygnusParser.LookAtContext = LookAtContext;
+
+LookAtContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+LookAtContext.prototype.point = function() {
+    return this.getTypedRuleContext(PointContext,0);
+};
+
+LookAtContext.prototype.look_criterion = function() {
+    return this.getTypedRuleContext(Look_criterionContext,0);
+};
+LookAtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterLookAt(this);
+	}
+};
+
+LookAtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitLookAt(this);
+	}
+};
+
+
+function MoveContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+MoveContext.prototype = Object.create(ActionContext.prototype);
+MoveContext.prototype.constructor = MoveContext;
+
+CygnusParser.MoveContext = MoveContext;
+
+MoveContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+MoveContext.prototype.direction = function() {
+    return this.getTypedRuleContext(DirectionContext,0);
+};
+
+MoveContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+MoveContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterMove(this);
+	}
+};
+
+MoveContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitMove(this);
+	}
+};
+
+
+function ModeChangeContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+ModeChangeContext.prototype = Object.create(ActionContext.prototype);
+ModeChangeContext.prototype.constructor = ModeChangeContext;
+
+CygnusParser.ModeChangeContext = ModeChangeContext;
+
+ModeChangeContext.prototype.WORD = function() {
+    return this.getToken(CygnusParser.WORD, 0);
+};
+ModeChangeContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterModeChange(this);
+	}
+};
+
+ModeChangeContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitModeChange(this);
+	}
+};
+
+
+function SetStaticContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+SetStaticContext.prototype = Object.create(ActionContext.prototype);
+SetStaticContext.prototype.constructor = SetStaticContext;
+
+CygnusParser.SetStaticContext = SetStaticContext;
+
+SetStaticContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+SetStaticContext.prototype.bool = function() {
+    return this.getTypedRuleContext(BoolContext,0);
+};
+SetStaticContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterSetStatic(this);
+	}
+};
+
+SetStaticContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitSetStatic(this);
+	}
+};
+
+
+function IncreaseOverTimeContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+IncreaseOverTimeContext.prototype = Object.create(ActionContext.prototype);
+IncreaseOverTimeContext.prototype.constructor = IncreaseOverTimeContext;
+
+CygnusParser.IncreaseOverTimeContext = IncreaseOverTimeContext;
+
+IncreaseOverTimeContext.prototype.settable = function() {
+    return this.getTypedRuleContext(SettableContext,0);
+};
+
+IncreaseOverTimeContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+IncreaseOverTimeContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterIncreaseOverTime(this);
+	}
+};
+
+IncreaseOverTimeContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitIncreaseOverTime(this);
+	}
+};
+
+
+function RotateToContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+RotateToContext.prototype = Object.create(ActionContext.prototype);
+RotateToContext.prototype.constructor = RotateToContext;
+
+CygnusParser.RotateToContext = RotateToContext;
+
+RotateToContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+RotateToContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+RotateToContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterRotateTo(this);
+	}
+};
+
+RotateToContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitRotateTo(this);
+	}
+};
+
+
+function SetBounceContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+SetBounceContext.prototype = Object.create(ActionContext.prototype);
+SetBounceContext.prototype.constructor = SetBounceContext;
+
+CygnusParser.SetBounceContext = SetBounceContext;
+
+SetBounceContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+SetBounceContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+SetBounceContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterSetBounce(this);
+	}
+};
+
+SetBounceContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitSetBounce(this);
+	}
+};
+
+
+function MoveAwayContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+MoveAwayContext.prototype = Object.create(ActionContext.prototype);
+MoveAwayContext.prototype.constructor = MoveAwayContext;
+
+CygnusParser.MoveAwayContext = MoveAwayContext;
+
+MoveAwayContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+MoveAwayContext.prototype.point = function() {
+    return this.getTypedRuleContext(PointContext,0);
+};
+
+MoveAwayContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+MoveAwayContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterMoveAway(this);
+	}
+};
+
+MoveAwayContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitMoveAway(this);
+	}
+};
+
+
+function IncreaseContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+IncreaseContext.prototype = Object.create(ActionContext.prototype);
+IncreaseContext.prototype.constructor = IncreaseContext;
+
+CygnusParser.IncreaseContext = IncreaseContext;
+
+IncreaseContext.prototype.settable = function() {
+    return this.getTypedRuleContext(SettableContext,0);
+};
+
+IncreaseContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+IncreaseContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterIncrease(this);
+	}
+};
+
+IncreaseContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitIncrease(this);
+	}
+};
+
+
+function ApplyRestitutionContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+ApplyRestitutionContext.prototype = Object.create(ActionContext.prototype);
+ApplyRestitutionContext.prototype.constructor = ApplyRestitutionContext;
+
+CygnusParser.ApplyRestitutionContext = ApplyRestitutionContext;
+
+ApplyRestitutionContext.prototype.entity = function(i) {
     if(i===undefined) {
         i = null;
     }
@@ -2532,63 +3182,211 @@ ActionContext.prototype.entity = function(i) {
         return this.getTypedRuleContext(EntityContext,i);
     }
 };
+ApplyRestitutionContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterApplyRestitution(this);
+	}
+};
 
-ActionContext.prototype.value = function() {
+ApplyRestitutionContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitApplyRestitution(this);
+	}
+};
+
+
+function SetSizeContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+SetSizeContext.prototype = Object.create(ActionContext.prototype);
+SetSizeContext.prototype.constructor = SetSizeContext;
+
+CygnusParser.SetSizeContext = SetSizeContext;
+
+SetSizeContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+SetSizeContext.prototype.value = function() {
     return this.getTypedRuleContext(ValueContext,0);
 };
-
-ActionContext.prototype.point = function() {
-    return this.getTypedRuleContext(PointContext,0);
+SetSizeContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterSetSize(this);
+	}
 };
 
-ActionContext.prototype.WORD = function() {
+SetSizeContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitSetSize(this);
+	}
+};
+
+
+function SetColorContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+SetColorContext.prototype = Object.create(ActionContext.prototype);
+SetColorContext.prototype.constructor = SetColorContext;
+
+CygnusParser.SetColorContext = SetColorContext;
+
+SetColorContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+SetColorContext.prototype.WORD = function() {
     return this.getToken(CygnusParser.WORD, 0);
 };
-
-ActionContext.prototype.location = function() {
-    return this.getTypedRuleContext(LocationContext,0);
+SetColorContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterSetColor(this);
+	}
 };
 
-ActionContext.prototype.settable = function() {
+SetColorContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitSetColor(this);
+	}
+};
+
+
+function DecreaseContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+DecreaseContext.prototype = Object.create(ActionContext.prototype);
+DecreaseContext.prototype.constructor = DecreaseContext;
+
+CygnusParser.DecreaseContext = DecreaseContext;
+
+DecreaseContext.prototype.settable = function() {
     return this.getTypedRuleContext(SettableContext,0);
 };
 
-ActionContext.prototype.settable_point = function() {
-    return this.getTypedRuleContext(Settable_pointContext,0);
+DecreaseContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+DecreaseContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterDecrease(this);
+	}
 };
 
-ActionContext.prototype.settable_bool = function() {
-    return this.getTypedRuleContext(Settable_boolContext,0);
+DecreaseContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitDecrease(this);
+	}
 };
 
-ActionContext.prototype.bool = function() {
-    return this.getTypedRuleContext(BoolContext,0);
+
+function SetSpriteContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+SetSpriteContext.prototype = Object.create(ActionContext.prototype);
+SetSpriteContext.prototype.constructor = SetSpriteContext;
+
+CygnusParser.SetSpriteContext = SetSpriteContext;
+
+SetSpriteContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
 };
 
-ActionContext.prototype.direction = function() {
+SetSpriteContext.prototype.WORD = function() {
+    return this.getToken(CygnusParser.WORD, 0);
+};
+SetSpriteContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterSetSprite(this);
+	}
+};
+
+SetSpriteContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitSetSprite(this);
+	}
+};
+
+
+function SetValueContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+SetValueContext.prototype = Object.create(ActionContext.prototype);
+SetValueContext.prototype.constructor = SetValueContext;
+
+CygnusParser.SetValueContext = SetValueContext;
+
+SetValueContext.prototype.settable = function() {
+    return this.getTypedRuleContext(SettableContext,0);
+};
+
+SetValueContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+SetValueContext.prototype.enterRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.enterSetValue(this);
+	}
+};
+
+SetValueContext.prototype.exitRule = function(listener) {
+    if(listener instanceof CygnusListener ) {
+        listener.exitSetValue(this);
+	}
+};
+
+
+function SetAccelerationContext(parser, ctx) {
+	ActionContext.call(this, parser);
+    ActionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+SetAccelerationContext.prototype = Object.create(ActionContext.prototype);
+SetAccelerationContext.prototype.constructor = SetAccelerationContext;
+
+CygnusParser.SetAccelerationContext = SetAccelerationContext;
+
+SetAccelerationContext.prototype.entity = function() {
+    return this.getTypedRuleContext(EntityContext,0);
+};
+
+SetAccelerationContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+
+SetAccelerationContext.prototype.direction = function() {
     return this.getTypedRuleContext(DirectionContext,0);
 };
 
-ActionContext.prototype.angular_direction = function() {
-    return this.getTypedRuleContext(Angular_directionContext,0);
+SetAccelerationContext.prototype.point = function() {
+    return this.getTypedRuleContext(PointContext,0);
 };
-
-ActionContext.prototype.look_criterion = function() {
-    return this.getTypedRuleContext(Look_criterionContext,0);
-};
-
-ActionContext.prototype.enterRule = function(listener) {
+SetAccelerationContext.prototype.enterRule = function(listener) {
     if(listener instanceof CygnusListener ) {
-        listener.enterAction(this);
+        listener.enterSetAcceleration(this);
 	}
 };
 
-ActionContext.prototype.exitRule = function(listener) {
+SetAccelerationContext.prototype.exitRule = function(listener) {
     if(listener instanceof CygnusListener ) {
-        listener.exitAction(this);
+        listener.exitSetAcceleration(this);
 	}
 };
-
 
 
 
@@ -2603,6 +3401,7 @@ CygnusParser.prototype.action = function() {
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case CygnusParser.T__28:
+            localctx = new AddContext(this, localctx);
             this.enterOuterAlt(localctx, 1);
             this.state = 302;
             this.match(CygnusParser.T__28);
@@ -2622,6 +3421,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__29:
+            localctx = new DeleteContext(this, localctx);
             this.enterOuterAlt(localctx, 2);
             this.state = 311;
             this.match(CygnusParser.T__29);
@@ -2633,6 +3433,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__30:
+            localctx = new DrawContext(this, localctx);
             this.enterOuterAlt(localctx, 3);
             this.state = 316;
             this.match(CygnusParser.T__30);
@@ -2648,6 +3449,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__31:
+            localctx = new ClearContext(this, localctx);
             this.enterOuterAlt(localctx, 4);
             this.state = 323;
             this.match(CygnusParser.T__31);
@@ -2659,6 +3461,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__32:
+            localctx = new FillContext(this, localctx);
             this.enterOuterAlt(localctx, 5);
             this.state = 328;
             this.match(CygnusParser.T__32);
@@ -2686,6 +3489,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__34:
+            localctx = new IncreaseContext(this, localctx);
             this.enterOuterAlt(localctx, 6);
             this.state = 337;
             this.match(CygnusParser.T__34);
@@ -2701,6 +3505,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__35:
+            localctx = new DecreaseContext(this, localctx);
             this.enterOuterAlt(localctx, 7);
             this.state = 344;
             this.match(CygnusParser.T__35);
@@ -2716,6 +3521,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__36:
+            localctx = new IncreaseOverTimeContext(this, localctx);
             this.enterOuterAlt(localctx, 8);
             this.state = 351;
             this.match(CygnusParser.T__36);
@@ -2731,6 +3537,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__37:
+            localctx = new DecreaseOverTimeContext(this, localctx);
             this.enterOuterAlt(localctx, 9);
             this.state = 358;
             this.match(CygnusParser.T__37);
@@ -2746,6 +3553,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__38:
+            localctx = new SetValueContext(this, localctx);
             this.enterOuterAlt(localctx, 10);
             this.state = 365;
             this.match(CygnusParser.T__38);
@@ -2761,6 +3569,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__39:
+            localctx = new SetPointContext(this, localctx);
             this.enterOuterAlt(localctx, 11);
             this.state = 372;
             this.match(CygnusParser.T__39);
@@ -2776,6 +3585,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__40:
+            localctx = new SetBoolContext(this, localctx);
             this.enterOuterAlt(localctx, 12);
             this.state = 379;
             this.match(CygnusParser.T__40);
@@ -2791,6 +3601,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__41:
+            localctx = new MoveContext(this, localctx);
             this.enterOuterAlt(localctx, 13);
             this.state = 386;
             this.match(CygnusParser.T__41);
@@ -2810,6 +3621,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__42:
+            localctx = new MoveTowardContext(this, localctx);
             this.enterOuterAlt(localctx, 14);
             this.state = 395;
             this.match(CygnusParser.T__42);
@@ -2829,6 +3641,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__43:
+            localctx = new MoveAwayContext(this, localctx);
             this.enterOuterAlt(localctx, 15);
             this.state = 404;
             this.match(CygnusParser.T__43);
@@ -2848,6 +3661,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__44:
+            localctx = new SetAccelerationContext(this, localctx);
             this.enterOuterAlt(localctx, 16);
             this.state = 413;
             this.match(CygnusParser.T__44);
@@ -2890,6 +3704,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__45:
+            localctx = new ApplyRestitutionContext(this, localctx);
             this.enterOuterAlt(localctx, 17);
             this.state = 425;
             this.match(CygnusParser.T__45);
@@ -2905,6 +3720,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__46:
+            localctx = new RotateContext(this, localctx);
             this.enterOuterAlt(localctx, 18);
             this.state = 432;
             this.match(CygnusParser.T__46);
@@ -2924,6 +3740,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__47:
+            localctx = new RotateToContext(this, localctx);
             this.enterOuterAlt(localctx, 19);
             this.state = 441;
             this.match(CygnusParser.T__47);
@@ -2939,6 +3756,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__48:
+            localctx = new LookAtContext(this, localctx);
             this.enterOuterAlt(localctx, 20);
             this.state = 448;
             this.match(CygnusParser.T__48);
@@ -2958,6 +3776,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__49:
+            localctx = new SetSpriteContext(this, localctx);
             this.enterOuterAlt(localctx, 21);
             this.state = 457;
             this.match(CygnusParser.T__49);
@@ -2973,6 +3792,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__50:
+            localctx = new SetColorContext(this, localctx);
             this.enterOuterAlt(localctx, 22);
             this.state = 464;
             this.match(CygnusParser.T__50);
@@ -2988,6 +3808,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__51:
+            localctx = new SetSizeContext(this, localctx);
             this.enterOuterAlt(localctx, 23);
             this.state = 471;
             this.match(CygnusParser.T__51);
@@ -3003,6 +3824,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__52:
+            localctx = new SetBounceContext(this, localctx);
             this.enterOuterAlt(localctx, 24);
             this.state = 478;
             this.match(CygnusParser.T__52);
@@ -3018,6 +3840,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__53:
+            localctx = new SetDraggableContext(this, localctx);
             this.enterOuterAlt(localctx, 25);
             this.state = 485;
             this.match(CygnusParser.T__53);
@@ -3033,6 +3856,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__54:
+            localctx = new SetStaticContext(this, localctx);
             this.enterOuterAlt(localctx, 26);
             this.state = 492;
             this.match(CygnusParser.T__54);
@@ -3048,6 +3872,7 @@ CygnusParser.prototype.action = function() {
             this.match(CygnusParser.T__4);
             break;
         case CygnusParser.T__55:
+            localctx = new ModeChangeContext(this, localctx);
             this.enterOuterAlt(localctx, 27);
             this.state = 499;
             this.match(CygnusParser.T__55);
