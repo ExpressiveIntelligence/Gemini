@@ -1,6 +1,8 @@
-# Running Gemini
+# Gemini
 
 _Requires Python 2 and Clingo 5. Both should be in your PATH._
+
+_Also requires the following Python 2 packages: numpy, deap, typing (`pip install numpy`, etc)._
 
 ## Examples
 
