@@ -84,3 +84,19 @@ The filenames, number, and options do not need to be in any particular order.
 **`-t n`** — Enable parallel solving with _n_ threads. Not to exceed double the number of cores on your machine. 
 
 Other options are described in the Potassco Handbook and via `clingo --help`.  
+
+## Writing Design Intents
+
+The current minimal design intent is one that gives constant integer values to `min_resources`, `max_resources`, `min_outcomes`, `max_outcomes`, and `min_end_outcomes`. 
+
+For example,
+
+```
+#const min_resources = 1.
+#const max_resources = 2.
+#const min_outcomes = 2.
+#const max_outcomes = 10.
+#const min_end_outcomes = 0.
+```
+
+See files in `intents` for examples of other statements you can make in an intent. 
