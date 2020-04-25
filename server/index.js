@@ -12,11 +12,20 @@ const port = 3000;
 const connectedClients = {};
 const batchesInProgress = {};
 
+// cancel previously initiated Gemini processes for this client
+function cancelPreviousBatchIfAny(clientID) {
+  for (let batchID of Object.keys(batchesInProgress)) {
+    if (batchesInProgress[batchID].client === clientID) {
+      batchesInProgress[batchID].process.kill();
+      delete batchesInProgress[batchID];
+    }
+  }
+}
+
 // generate a new batch of games with the specified options
 function generateGames(opts) {
-  // TODO actually use the intent received in opts (i.e. from the client)
-  const {batchID, /*intent,*/ numDistinctGameProgenitors = 1, numGamesToGenerate = 1} = opts;
-  const intent = fs.readFileSync('./intents/dinner_intent.lp'); // use a known-good intent for testing
+  const {batchID, intent, numGamesToGenerate = 100, numDistinctGameProgenitors = 5} = opts;
+  //const intent = fs.readFileSync('./intents/tool_intent_real.lp'); // use a known-good intent for testing
 
   const outFileName = `./games/${batchID}`;
 
@@ -25,8 +34,8 @@ function generateGames(opts) {
   fs.writeFileSync(intentFileName, intent);
 
   // set up arguments to the Gemini generation process
-  const geminiArgs = ['simulate.py', outFileName, numDistinctGameProgenitors, '$(./common.sh)',
-                      intentFileName, numGamesToGenerate, '--project'];
+  const geminiArgs = ['simulate.py', outFileName, numGamesToGenerate, '$(./common.sh)',
+                      intentFileName, numDistinctGameProgenitors, '--project'];
 
   // launch the Gemini generation process
   console.log(`#### STARTED GENERATING BATCH: ${batchID}`);
@@ -34,11 +43,12 @@ function generateGames(opts) {
   const geminiProcess = child_process.spawn('python3', geminiArgs);
   // TODO figure out why Gemini won't generate unless there are stdout/stderr data listeners here
   geminiProcess.stdout.on('data', data => {});
-  geminiProcess.stderr.on('data', data => {});
+  geminiProcess.stderr.on('data', data => { console.log('err', data.toString()) });
   geminiProcess.on('close', code => {
     const endTime = Date.now();
     console.log(`#### FINISHED GENERATING BATCH: ${batchID} (took ${endTime - startTime}ms)`);
   });
+  return geminiProcess;
 }
 
 // initialize the HTTP server
@@ -62,22 +72,19 @@ wsServer.on('request', req => {
   // when a client requests a new batch of games, keep track of the batch's requester
   connection.on('message', msg => {
     console.log(`Client sent message: ${clientID}`);
+    cancelPreviousBatchIfAny(clientID);
     const opts = JSON.parse(msg.utf8Data);
     console.log(opts);
-    batchesInProgress[opts.batchID] = clientID;
     opts.clientID = clientID;
-    generateGames(opts);
+    const geminiProcess = generateGames(opts);
+    batchesInProgress[opts.batchID] = {client: clientID, process: geminiProcess};
   });
 
   // when the client disconnects, log the event and clear it from the server state
   connection.on('close', (reasonCode, desc) => {
     console.log(`Client disconnected: ${clientID}`);
     delete connectedClients[clientID];
-    for (let batchID of Object.keys(batchesInProgress)) {
-      if (batchesInProgress[batchID] === clientID) {
-        delete batchesInProgress[batchID];
-      }
-    }
+    cancelPreviousBatchIfAny(clientID);
   });
 });
 
@@ -97,7 +104,7 @@ watcher.on('add', (path, stats) => {
   console.log(`#### GENERATED GAME IN BATCH: ${batchID} (game ${gameID})`);
 
   // figure out which client requested this game, so we can send it to them
-  const clientID = batchesInProgress[batchID];
+  const clientID = batchesInProgress[batchID].client;
   const connection = connectedClients[clientID];
 
   // bail out early if the client that requested this game is no longer connected
