@@ -43,7 +43,22 @@ function generateGames(opts) {
   const geminiProcess = child_process.spawn('python3', geminiArgs);
   // TODO figure out why Gemini won't generate unless there are stdout/stderr data listeners here
   geminiProcess.stdout.on('data', data => {});
-  geminiProcess.stderr.on('data', data => { console.log('err', data.toString()) });
+  geminiProcess.stderr.on('data', data => {
+    const errMsg = data.toString();
+    console.log('err', errMsg);
+    if (errMsg.trim().endsWith("KeyError: 'Witnesses'")) {
+      // no valid games for this intent – tell the client there was an error
+      const clientID = batchesInProgress[batchID].client;
+      const connection = connectedClients[clientID];
+      if (!connection) {
+        console.log(`Requester of batch ${batchID} is no longer connected.`);
+        return;
+      }
+      console.log(`Reporting error to requester ${clientID}!`);
+      const res = {batchID, type: 'error', errMsg: 'No valid games for intent'};
+      connection.sendUTF(JSON.stringify(res));
+    }
+  });
   geminiProcess.on('close', code => {
     const endTime = Date.now();
     console.log(`#### FINISHED GENERATING BATCH: ${batchID} (took ${endTime - startTime}ms)`);
