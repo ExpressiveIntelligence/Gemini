@@ -24,7 +24,7 @@ function cancelPreviousBatchIfAny(clientID) {
 
 // generate a new batch of games with the specified options
 function generateGames(opts) {
-  const {batchID, intent, numGamesToGenerate = 100, numDistinctGameProgenitors = 5} = opts;
+  const {batchID, intent, numGamesToGenerate = 100, numDistinctGameProgenitors = 20} = opts;
   //const intent = fs.readFileSync('./intents/tool_intent_real.lp'); // use a known-good intent for testing
 
   const outFileName = `./games/${batchID}`;
