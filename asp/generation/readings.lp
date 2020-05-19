@@ -226,6 +226,12 @@ required(consumes) :- required(sharing).
     precondition(overlaps(Entity2,Entity1,true),Outcome),
     result(Outcome,delete(Entity2)).
 
+% entities in overlaps(E1,E2) might be ordered either way,
+% so we need to check for the inverse order too
+{ reading(consumes,relation(Entity1,Entity2)) } :-
+    precondition(overlaps(Entity1,Entity2,true),Outcome),
+    result(Outcome,delete(Entity2)).
+
 
 % TODO: An entity can also be interpreted as consuming another entity
 % if overlapping with it decreases its health
