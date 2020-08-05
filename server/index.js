@@ -5,14 +5,8 @@ const http = require('http');
 const path = require('path');
 const websocket = require('websocket');
 
-// webserver config
-const hostname = '127.0.0.1';
-const port = 3000;
-
-// Where the server will look for the core Gemini files.
-// This should be a directory that contains `simulate.py` (the main Gemini entry point)
-// and `common.sh` (which tells `simulate.py` where to find the core Gemini ASP files).
-const geminiPath = '../asp';
+// pull in configuration from local config.js
+const config = require('./config');
 
 // track connected clients and WIP game batches
 const connectedClients = {};
@@ -46,7 +40,7 @@ function generateGames(opts) {
   // launch the Gemini generation process
   console.log(`#### STARTED GENERATING BATCH: ${batchID}`);
   const startTime = Date.now();
-  const geminiProcess = child_process.spawn('python3', geminiArgs, {cwd: geminiPath});
+  const geminiProcess = child_process.spawn(config.python3Command, geminiArgs, {cwd: config.geminiPath});
   // TODO figure out why Gemini won't generate unless there are stdout/stderr data listeners here
   geminiProcess.stdout.on('data', data => { /*console.log(data.toString())*/ });
   geminiProcess.stderr.on('data', data => {
@@ -78,8 +72,8 @@ const server = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'text/plain');
   res.end('no thanks');
 });
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(config.port, config.hostname, () => {
+  console.log(`Server running at http://${config.hostname}:${config.port}/`);
 });
 
 // initialize the websocket server

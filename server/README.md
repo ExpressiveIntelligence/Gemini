@@ -54,10 +54,14 @@ Alternatively, if the server runs into a problem while processing your request, 
 }
 ```
 
-## Assumptions
+## Configuration
 
-The server will listen to port `3000` by default. You can change this by altering the `port` variable in `index.js`.
+The `config.js` file contains several configuration variables that you might want to change:
 
-By default, the server assumes that the core Gemini files (in particular `simulate.py`, the main Gemini entry point, and `common.sh`, which tells `simulate.py` where to find the core Gemini ASP files) are located in an adjacent directory to this one, named `asp/`. This is based on the file structure of the Gemini repo. You can change this by altering the `geminiPath` variable in `index.js`.
+* `config.port`: The port to which the server will listen. Set to `3000` by default.
+* `config.geminiPath`: The path to the core Gemini files. This should always be a directory containing `simulate.py` (the main Gemini entry point) and `common.sh` (which tells `simulate.py` where to find the core Gemini ASP files). Set to `../asp` by default. This is correct if you've pulled down the Gemini repo, but in case you want to use a different version of Gemini (e.g. a local development version), you're free to change this.
+* `config.python3Command`: The name of the Python 3 command, which the server will use to launch `simulate.py`. Set to `python3` by default. Depending on how your environment is set up, you might want a different command instead; for instance, Windows users might want to change this to `py`.
+
+## Caveats
 
 Whenever the server receives a request, it will save the provided intent as a file in the `generated/intents/` directory. Generated games will be saved as files in the `generated/games/` directory. The current version of the server doesn't ever clean up these files on its own, so you might want to delete the `generated/` directory from time to time if you don't want to accumulate too much garbage on your filesystem.

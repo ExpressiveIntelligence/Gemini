@@ -1,13 +1,10 @@
 {
   "name": "gemini-server",
   "version": "0.0.0",
-  "description": "",
+  "description": "Websocket server for the Gemini game generator",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
+  "author": "Max Kreminski",
+  "contributors": ["Melanie Dickinson"],
   "dependencies": {
     "chokidar": "^3.3.1",
     "websocket": "^1.0.31"
