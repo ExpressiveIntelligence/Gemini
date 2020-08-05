@@ -1,1 +1,0 @@
-we want the asp/games directory to exist in git so that we can reliably use it as a default output location for the server. however, we don't want any of the actual games to be committed to the repository. this file is a placeholder that makes git acknowledge the existence of this directory; it does not do anything else. -max 2019-10-30

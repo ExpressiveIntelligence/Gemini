@@ -2,11 +2,17 @@ const child_process = require('child_process');
 const chokidar = require('chokidar');
 const fs = require('fs');
 const http = require('http');
+const path = require('path');
 const websocket = require('websocket');
 
 // webserver config
 const hostname = '127.0.0.1';
 const port = 3000;
+
+// Where the server will look for the core Gemini files.
+// This should be a directory that contains `simulate.py` (the main Gemini entry point)
+// and `common.sh` (which tells `simulate.py` where to find the core Gemini ASP files).
+const geminiPath = '../asp';
 
 // track connected clients and WIP game batches
 const connectedClients = {};
@@ -25,24 +31,24 @@ function cancelPreviousBatchIfAny(clientID) {
 // generate a new batch of games with the specified options
 function generateGames(opts) {
   const {batchID, intent, numGamesToGenerate = 100, numDistinctGameProgenitors = 20} = opts;
-  //const intent = fs.readFileSync('./intents/tool_intent_real.lp'); // use a known-good intent for testing
+  //const intent = fs.readFileSync('./test_intent.lp'); // use a known-good intent for testing
 
-  const outFileName = `./games/${batchID}`;
+  const outFileName = `./generated/games/${batchID}`;
 
   // create intent file for this batch
-  const intentFileName = `./intents/${batchID}.lp`;
+  const intentFileName = `./generated/intents/${batchID}.lp`;
   fs.writeFileSync(intentFileName, intent);
 
   // set up arguments to the Gemini generation process
-  const geminiArgs = ['simulate.py', outFileName, numGamesToGenerate, '$(./common.sh)',
-                      intentFileName, numDistinctGameProgenitors, '--project'];
+  const geminiArgs = ['./simulate.py', path.resolve(outFileName), numGamesToGenerate, '$(./common.sh)',
+                      path.resolve(intentFileName), numDistinctGameProgenitors, '--project'];
 
   // launch the Gemini generation process
   console.log(`#### STARTED GENERATING BATCH: ${batchID}`);
   const startTime = Date.now();
-  const geminiProcess = child_process.spawn('python3', geminiArgs);
+  const geminiProcess = child_process.spawn('python3', geminiArgs, {cwd: geminiPath});
   // TODO figure out why Gemini won't generate unless there are stdout/stderr data listeners here
-  geminiProcess.stdout.on('data', data => {});
+  geminiProcess.stdout.on('data', data => { /*console.log(data.toString())*/ });
   geminiProcess.stderr.on('data', data => {
     const errMsg = data.toString();
     console.log('err', errMsg);
@@ -103,11 +109,12 @@ wsServer.on('request', req => {
   });
 });
 
-// move into the top-level asp directory
-process.chdir('../asp');
+// create temp output directories if they don't exist
+fs.mkdirSync('./generated/games', {recursive: true});
+fs.mkdirSync('./generated/intents', {recursive: true});
 
 // initialize the watcher that keeps track of new game files
-const watcher = chokidar.watch('./games', {
+const watcher = chokidar.watch('./generated/games', {
   ignoreInitial: true,
   persistent: true
 });
