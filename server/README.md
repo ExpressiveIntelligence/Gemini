@@ -59,7 +59,7 @@ Alternatively, if the server runs into a problem while processing your request, 
 The `config.js` file contains several configuration variables that you might want to change:
 
 * `config.port`: The port to which the server will listen. Set to `3000` by default.
-* `config.geminiPath`: The path to the core Gemini files. This should always be a directory containing `simulate.py` (the main Gemini entry point) and `common.sh` (which tells `simulate.py` where to find the core Gemini ASP files). Set to `../asp` by default. This is correct if you've pulled down the Gemini repo, but in case you want to use a different version of Gemini (e.g. a local development version), you're free to change this.
+* `config.geminiPath`: The path to the core Gemini files. This should always be a directory containing `simulate.py` (the main Gemini entry point) and the `generation/` directory containing the core Gemini ASP files. Set to `../asp` by default. This is correct if you've pulled down the Gemini repo, but in case you want to use a different version of Gemini (e.g. a local development version), you're free to change this.
 * `config.python3Command`: The name of the Python 3 CLI command, which the server will use to launch `simulate.py`. Set to `python3` by default. Depending on how your environment is set up, you might want a different command instead; for instance, Windows users might want to change this to `py`.
 
 ## Caveats

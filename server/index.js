@@ -34,7 +34,7 @@ function generateGames(opts) {
   fs.writeFileSync(intentFileName, intent);
 
   // set up arguments to the Gemini generation process
-  const geminiArgs = ['./simulate.py', path.resolve(outFileName), numGamesToGenerate, '$(./common.sh)',
+  const geminiArgs = ['./simulate.py', path.resolve(outFileName), numGamesToGenerate, './generation/gemini.lp',
                       path.resolve(intentFileName), numDistinctGameProgenitors, '--project'];
 
   // launch the Gemini generation process
