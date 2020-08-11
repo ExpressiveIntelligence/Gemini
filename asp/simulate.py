@@ -127,15 +127,12 @@ def prettify(atom):
     return s
 
 
-import collections
-
-
 def hashable(obj):
-    if isinstance(obj, collections.Hashable):
+    if isinstance(obj, collections.abc.Hashable):
         items = obj
-    elif isinstance(obj, collections.Mapping):
+    elif isinstance(obj, collections.abc.Mapping):
         items = frozenset((k, hashable(v)) for k, v in obj.items())
-    elif isinstance(obj, collections.Iterable):
+    elif isinstance(obj, collections.abc.Iterable):
         items = tuple(hashable(item) for item in obj)
     else:
         raise TypeError(type(obj))
