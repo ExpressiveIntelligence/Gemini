@@ -114,7 +114,7 @@ const watcher = chokidar.watch('./generated/games', {
 });
 watcher.on('add', (path, stats) => {
   // extract info about this game from its filename
-  const gameInfo = path.match(/\/([A-Za-z0-9_-]+)_([0-9]+)\.lp$/);
+  const gameInfo = path.match(/([A-Za-z0-9_-]+)_([0-9]+)\.lp$/);
   if (!gameInfo) return; // bail out early if we can't parse game info from this filename
   const [_, batchID, gameID] = gameInfo;
   console.log(`#### GENERATED GAME IN BATCH: ${batchID} (game ${gameID})`);

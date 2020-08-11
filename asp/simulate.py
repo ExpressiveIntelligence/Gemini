@@ -18,6 +18,10 @@ modifiers = {'increase': lambda x, y:  x + y,
              'decrease': lambda x, y:  x - y}
 
 
+creator.create("FitnessMax", base.Fitness, weights=(1.0,))
+creator.create("Individual", list, fitness=creator.FitnessMax)
+
+
 def solve(args, num_to_gen):
     """Run clingo with the provided argument list and return the parsed JSON result."""
 
@@ -464,8 +468,6 @@ if __name__ == '__main__':
                     cond = prettify(ooo['terms'][1])
                     player_model[outcome] = player_model_mappings[cond]
 
-        creator.create("FitnessMax", base.Fitness, weights=(1.0,))
-        creator.create("Individual", list, fitness=creator.FitnessMax)
 
         toolbox = base.Toolbox()
         nbCPU = multiprocessing.cpu_count()
